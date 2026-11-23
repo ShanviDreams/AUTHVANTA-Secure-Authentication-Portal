@@ -1,0 +1,41 @@
+﻿{% extends "base.html" %}
+{% block title %}AUTHVANTA | Profile{% endblock %}
+{% block content %}
+<main class="dashboard-page">
+
+    <section class="dashboard-hero">
+        <div>
+            <span class="dashboard-eyebrow">ACCOUNT PROFILE</span>
+            <h2>Your Secure Identity</h2>
+            <p>View the identity information associated with your AUTHVANTA account.</p>
+        </div>
+        <div class="dashboard-status"><span>●</span> Account Profile</div>
+    </section>
+
+    <section class="dashboard-panel profile-panel">
+        <div class="panel-header">
+            <div>
+                <span class="panel-eyebrow">PROFILE</span>
+                <h3>Account Information</h3>
+            </div>
+            <span class="panel-icon">👤</span>
+        </div>
+
+        <div class="profile-details large-profile">
+            <div><span>Username</span><strong>{{ current_user.username }}</strong></div>
+            <div><span>Email Address</span><strong>{{ current_user.email }}</strong></div>
+            <div><span>Account Role</span><strong>{{ current_user.role }}</strong></div>
+            <div>
+                <span>Email Status</span>
+                <strong>{% if current_user.email_verified %}Verified{% else %}Not Verified{% endif %}</strong>
+            </div>
+            <div><span>Created On</span><strong>{{ current_user.created_at.strftime("%d %B %Y") }}</strong></div>
+        </div>
+
+        <a href="{{ url_for('dashboard.dashboard') }}" class="dashboard-button">
+            ← Back to Dashboard
+        </a>
+    </section>
+
+</main>
+{% endblock %}

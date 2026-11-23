@@ -1,0 +1,30 @@
+﻿{% extends "base.html" %}
+{% block title %}AUTHVANTA | Admin Portal{% endblock %}
+{% block content %}
+<main class="auth-page admin-auth-page">
+    <section class="auth-card">
+        <div class="auth-header">
+            <div class="auth-icon">◆</div>
+            <span class="section-label">SECURE ADMINISTRATION</span>
+            <h2>Admin Portal</h2>
+            <p>Restricted access for authorized administrators only.</p>
+        </div>
+        <form method="POST" class="auth-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <label for="email">Administrator Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter administrator email" autocomplete="username" maxlength="120" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter administrator password" autocomplete="current-password" required>
+            </div>
+            <button type="submit" class="auth-button">ADMIN LOGIN <span>→</span></button>
+        </form>
+        <div class="auth-footer">
+            <p>Not an administrator?</p>
+            <a href="{{ url_for('auth.login') }}">Back to User Login</a>
+        </div>
+    </section>
+</main>
+{% endblock %}

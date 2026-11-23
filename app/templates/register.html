@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Create Account | AUTHVANTA{% endblock %}
+
+{% block content %}
+
+<main class="auth-container">
+
+    <div class="auth-card register-card">
+
+        <div class="auth-heading">
+            <div class="shield-icon">🛡</div>
+            <h2>Create Account</h2>
+            <p>Join AUTHVANTA and experience secure access.</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('auth.register') }}">
+
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Choose a username"
+                    required
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a strong password"
+                    required
+                    autocomplete="new-password"
+                >
+
+                <div class="password-hint">
+                    Use a strong password with uppercase, lowercase,
+                    number and special character.
+                </div>
+            </div>
+
+            <div class="security-note">
+                <span>🔐</span>
+                Your password is securely protected before storage.
+            </div>
+
+            <button type="submit" class="primary-btn">
+                CREATE ACCOUNT
+                <span>→</span>
+            </button>
+
+        </form>
+
+        <div class="switch-auth">
+            Already have an account?
+            <a href="{{ url_for('auth.login') }}">Login here</a>
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}

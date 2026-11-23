@@ -1,0 +1,55 @@
+﻿{% extends "base.html" %}
+{% block title %}AUTHVANTA | Security Logs{% endblock %}
+{% block content %}
+<main class="dashboard-page admin-data-page">
+    <section class="dashboard-hero">
+        <div>
+            <span class="section-label">SECURITY / EVENT MONITORING</span>
+            <h2>Security Logs</h2>
+            <p>Centralized monitoring of application security events.</p>
+        </div>
+        <div class="account-status">SECURITY MONITOR</div>
+    </section>
+
+    <section class="dashboard-panel full-panel">
+        <div class="panel-heading">
+            <div>
+                <span class="section-label">SYSTEM AUDIT TRAIL</span>
+                <h3>Security Event Records</h3>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table class="security-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Event</th>
+                        <th>Description</th>
+                        <th>User ID</th>
+                        <th>IP Address</th>
+                        <th>Severity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td>{{ log.created_at.strftime("%d %b %Y, %H:%M") }}</td>
+                        <td>{{ log.event_type }}</td>
+                        <td>{{ log.description }}</td>
+                        <td>{{ log.user_id or "N/A" }}</td>
+                        <td>{{ log.ip_address or "N/A" }}</td>
+                        <td>
+                            <span class="severity-badge {{ log.severity|lower }}">
+                                {{ log.severity }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="6" class="admin-empty-cell">No security events recorded yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock %}

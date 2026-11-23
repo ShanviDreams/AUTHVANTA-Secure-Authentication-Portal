@@ -5,3 +5,16 @@ __pycache__/
 instance/
 .vscode/
 *.log
+admin_mfa_qr.png
+# Local CodeArena secrets
+codearena/.env
+
+# Local backups
+*.bak
+*.bak_*
+*.oauth-backup
+*_backup.py
+*.zip
+backups/
+UI_BACKUP_2026/
+theme_backup/

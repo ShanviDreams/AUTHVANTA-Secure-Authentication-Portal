@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fffaf2">
+    <title>{% block title %}AUTHVANTA{% endblock %}</title>
+    <script>
+        (function () {
+            const saved = localStorage.getItem("authvanta-theme");
+            document.documentElement.dataset.theme =
+                saved === "dark" ? "dark" : "light";
+        })();
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+<body class="{% block body_class %}auth-body{% endblock %}">
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="toast-container">
+            {% for category, message in messages %}
+                <div class="auth-toast {{ category }}">
+                    <div class="toast-icon">!</div>
+                    <div class="toast-content">
+                        <strong>AUTHVANTA notification</strong>
+                        <span>{{ message }}</span>
+                    </div>
+                    <button type="button" class="toast-close" onclick="this.parentElement.remove()" aria-label="Close">×</button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<div class="page">
+    <header class="topbar">
+        <a class="brand" href="/">
+            <div class="brand-icon">A</div>
+            <div>
+                <h1>AUTHVANTA</h1>
+                <p>Secure Identity. Smarter Access.</p>
+            </div>
+        </a>
+
+        <div class="topbar-actions">
+            <span class="security-badge"><span class="security-indicator"></span> Secure Access</span>
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch colour theme">
+                <span id="themeIcon">☾</span>
+                <span id="themeLabel">Dark mode</span>
+            </button>
+            {% if current_user.is_authenticated %}
+                <form method="POST" action="{{ url_for('auth.logout') }}" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="logout-button">Log out</button>
+                </form>
+            {% endif %}
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        <div>
+            <strong>AUTHVANTA by Shanvi</strong>
+            <span>Secure identity. Responsible access.</span>
+        </div>
+        <div>
+            <strong>Privacy comes first</strong>
+            <span>Your account security matters.</span>
+        </div>
+        <p>© 2026 AUTHVANTA by Shanvi. All rights reserved.</p>
+    </footer>
+</div>
+
+<script src="{{ url_for('static', filename='js/theme.js') }}" defer></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
+

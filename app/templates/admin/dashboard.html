@@ -1,0 +1,56 @@
+﻿{% extends "base.html" %}
+{% block title %}AUTHVANTA | Admin Dashboard{% endblock %}
+{% block content %}
+<main class="dashboard-page admin-dashboard-page">
+    <section class="dashboard-hero">
+        <div>
+            <span class="dashboard-eyebrow">AUTHVANTA / ADMIN CONSOLE</span>
+            <h2>Security Control Center</h2>
+            <p>Monitor users, authentication activity and security events.</p>
+        </div>
+        <div class="dashboard-status"><span>●</span> ADMIN ACCESS</div>
+    </section>
+
+    <section class="security-cards">
+        <div class="security-card"><div class="card-icon">01</div><div><span>Total Users</span><strong>{{ total_users }}</strong></div></div>
+        <div class="security-card"><div class="card-icon">02</div><div><span>Verified Users</span><strong>{{ verified_users }}</strong></div></div>
+        <div class="security-card"><div class="card-icon">03</div><div><span>Administrators</span><strong>{{ admin_users }}</strong></div></div>
+        <div class="security-card"><div class="card-icon">04</div><div><span>Failed Logins</span><strong>{{ failed_logins }}</strong></div></div>
+    </section>
+
+    <section class="admin-navigation">
+        <a href="{{ url_for('admin.users') }}" class="admin-nav-card">
+            <span>01</span><strong>User Management</strong><small>View registered users</small>
+        </a>
+        <a href="{{ url_for('admin.security_logs') }}" class="admin-nav-card">
+            <span>02</span><strong>Security Logs</strong><small>Monitor security events</small>
+        </a>
+        <a href="{{ url_for('admin.login_attempts') }}" class="admin-nav-card">
+            <span>03</span><strong>Login Attempts</strong><small>Review authentication attempts</small>
+        </a>
+    </section>
+
+    <section class="dashboard-panel full-panel">
+        <div class="panel-header">
+            <div><span class="panel-eyebrow">SECURITY MONITOR</span><h3>Recent Security Events</h3></div>
+            <span class="panel-icon">🛡</span>
+        </div>
+        {% if recent_logs %}
+        <div class="activity-list">
+            {% for log in recent_logs %}
+            <div class="activity-row">
+                <div class="activity-icon">{{ "!" if log.severity == "WARNING" else "✓" }}</div>
+                <div class="activity-info">
+                    <strong>{{ log.event_type }}</strong>
+                    <span>{{ log.description }}</span>
+                </div>
+                <time>{{ log.created_at.strftime("%d %b %Y, %H:%M") }}</time>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">No security events recorded yet.</div>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,564 @@
+﻿/* =========================================================
+   AUTHVANTA — USER & ADMIN DASHBOARD
+   Warm Pastel Theme | Light + Dark
+   ========================================================= */
+
+/* ---------- LIGHT THEME ---------- */
+html[data-theme="light"] {
+    --db-bg: #faf5ee;
+    --db-surface: #fffdf9;
+    --db-soft: #fff1e5;
+    --db-border: #f0dfce;
+    --db-text: #392b22;
+    --db-muted: #8b7768;
+    --db-accent: #d97736;
+    --db-accent-hover: #bd6128;
+    --db-accent-soft: #fce7d5;
+    --db-success: #39805b;
+    --db-success-bg: #e7f4e9;
+    --db-danger: #bd5145;
+    --db-danger-bg: #fbe9e5;
+    --db-shadow: 0 10px 30px rgba(91, 58, 32, .07);
+}
+
+/* ---------- DARK THEME ---------- */
+html[data-theme="dark"] {
+    --db-bg: #191511;
+    --db-surface: #241e18;
+    --db-soft: #30251c;
+    --db-border: #463629;
+    --db-text: #f7eee5;
+    --db-muted: #b6a394;
+    --db-accent: #efa15f;
+    --db-accent-hover: #ffb779;
+    --db-accent-soft: #49301f;
+    --db-success: #8bc9a0;
+    --db-success-bg: #263b2d;
+    --db-danger: #f09a8d;
+    --db-danger-bg: #462a26;
+    --db-shadow: 0 10px 30px rgba(0, 0, 0, .22);
+}
+
+/* ---------- PAGE ---------- */
+.dashboard-page {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+    padding: 42px 0 60px;
+    color: var(--db-text);
+}
+
+html[data-theme="light"] .dashboard-page {
+    background: transparent;
+}
+
+html[data-theme="dark"] .dashboard-page {
+    background: transparent;
+}
+
+.dashboard-page,
+.dashboard-page * {
+    box-sizing: border-box;
+}
+
+.dashboard-page h1,
+.dashboard-page h2,
+.dashboard-page h3,
+.dashboard-page p {
+    color: var(--db-text);
+}
+
+/* ---------- HERO ---------- */
+.dashboard-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 30px;
+    padding: 30px 34px;
+    border: 1px solid var(--db-border);
+    border-radius: 22px;
+    background: var(--db-surface);
+    box-shadow: var(--db-shadow);
+}
+
+.dashboard-hero h1,
+.dashboard-hero h2 {
+    margin: 8px 0;
+    font-size: clamp(26px, 3vw, 34px);
+    font-weight: 750;
+    letter-spacing: -.7px;
+}
+
+.dashboard-eyebrow,
+.panel-eyebrow {
+    color: var(--db-accent) !important;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+}
+
+.dashboard-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 15px;
+    border: 1px solid var(--db-border);
+    border-radius: 30px;
+    background: var(--db-soft);
+    color: var(--db-text);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* ---------- SUMMARY CARDS ---------- */
+.security-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin: 25px 0 30px;
+}
+
+.security-card {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    min-width: 0;
+    padding: 23px;
+    border: 1px solid var(--db-border);
+    border-radius: 19px;
+    background: var(--db-surface);
+    box-shadow: var(--db-shadow);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.security-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(91, 58, 32, .12);
+}
+
+.security-card-icon,
+.card-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+    background: var(--db-accent-soft);
+    color: var(--db-accent);
+    font-size: 21px;
+}
+
+.security-card h3,
+.security-card h4 {
+    margin: 0 0 6px;
+    color: var(--db-muted);
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.security-card p,
+.security-card strong {
+    margin: 0;
+    color: var(--db-text);
+    font-size: 23px;
+    font-weight: 750;
+}
+
+/* ---------- CONTENT GRID & PANELS ---------- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    align-items: start;
+}
+
+.dashboard-panel {
+    min-width: 0;
+    padding: 26px;
+    border: 1px solid var(--db-border);
+    border-radius: 20px;
+    background: var(--db-surface);
+    box-shadow: var(--db-shadow);
+}
+
+.dashboard-panel.full-panel {
+    grid-column: 1 / -1;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--db-border);
+}
+
+.panel-header h2,
+.panel-header h3 {
+    margin: 5px 0 0;
+    color: var(--db-text);
+    font-size: 19px;
+    font-weight: 750;
+}
+
+.panel-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    border-radius: 13px;
+    background: var(--db-accent-soft);
+    color: var(--db-accent);
+}
+
+/* ---------- SECURITY STATUS ---------- */
+.security-active,
+.security-inactive {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 15px 0;
+    padding: 15px 17px;
+    border-radius: 13px;
+    font-weight: 650;
+}
+
+.security-active {
+    color: var(--db-success);
+    background: var(--db-success-bg);
+}
+
+.security-inactive {
+    color: var(--db-danger);
+    background: var(--db-danger-bg);
+}
+
+.security-active-icon {
+    color: var(--db-success);
+    font-size: 20px;
+}
+
+/* ---------- BUTTONS & LINKS ---------- */
+.dashboard-button,
+.mfa-disable-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    min-height: 43px;
+    margin-top: 12px;
+    padding: 11px 19px;
+    border: 1px solid transparent;
+    border-radius: 11px;
+    background: var(--db-accent);
+    color: #24170f !important;
+    font-size: 13px;
+    font-weight: 750;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.dashboard-button:hover,
+.mfa-disable-button:hover {
+    background: var(--db-accent-hover);
+    transform: translateY(-1px);
+}
+
+.mfa-disable-button {
+    background: var(--db-danger-bg);
+    color: var(--db-danger) !important;
+    border-color: var(--db-border);
+}
+
+/* ---------- PROFILE DETAILS ---------- */
+.profile-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.profile-details > div {
+    padding: 15px;
+    border: 1px solid var(--db-border);
+    border-radius: 12px;
+    background: var(--db-soft);
+    overflow-wrap: anywhere;
+}
+
+.profile-details p,
+.profile-details span {
+    color: var(--db-muted);
+    font-size: 12px;
+}
+
+.profile-details strong,
+.profile-details b {
+    color: var(--db-text);
+}
+
+/* ---------- TABLES ---------- */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--db-border);
+    border-radius: 13px;
+}
+
+.security-table {
+    width: 100%;
+    min-width: 580px;
+    border-collapse: collapse;
+    background: var(--db-surface);
+    color: var(--db-text);
+    font-size: 13px;
+}
+
+.security-table th {
+    padding: 14px 16px;
+    background: var(--db-soft);
+    color: var(--db-muted);
+    text-align: left;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .7px;
+    text-transform: uppercase;
+}
+
+.security-table td {
+    padding: 14px 16px;
+    border-top: 1px solid var(--db-border);
+    color: var(--db-text);
+    vertical-align: middle;
+}
+
+.security-table tr:hover td {
+    background: var(--db-soft);
+}
+
+/* ---------- BADGES ---------- */
+.status-success,
+.severity-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 11px;
+    border-radius: 30px;
+    background: var(--db-success-bg);
+    color: var(--db-success);
+    font-size: 11px;
+    font-weight: 750;
+}
+
+.status-danger,
+.severity-badge.high,
+.severity-badge.critical {
+    background: var(--db-danger-bg);
+    color: var(--db-danger);
+}
+
+/* ---------- ADMIN NAVIGATION ---------- */
+.admin-navigation {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+    margin: 25px 0 30px;
+}
+
+.admin-nav-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid var(--db-border);
+    border-radius: 17px;
+    background: var(--db-surface);
+    color: var(--db-text) !important;
+    text-decoration: none !important;
+    box-shadow: var(--db-shadow);
+    transition: transform .2s ease, border-color .2s ease;
+}
+
+.admin-nav-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--db-accent);
+}
+
+.admin-nav-card h3,
+.admin-nav-card p {
+    color: var(--db-text);
+}
+
+/* ---------- ADMIN ACTIVITY ---------- */
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.activity-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 4px;
+    border-bottom: 1px solid var(--db-border);
+}
+
+.activity-row:last-child {
+    border-bottom: 0;
+}
+
+.activity-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--db-accent-soft);
+    color: var(--db-accent);
+}
+
+.activity-info {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.activity-info h4,
+.activity-info p {
+    margin: 3px 0;
+    color: var(--db-text);
+}
+
+.activity-info small {
+    color: var(--db-muted);
+}
+
+/* ---------- EMPTY STATE ---------- */
+.empty-state {
+    padding: 28px 18px;
+    border: 1px dashed var(--db-border);
+    border-radius: 14px;
+    background: var(--db-soft);
+    color: var(--db-muted);
+    text-align: center;
+}
+
+/* ---------- DARK THEME OVERRIDES ---------- */
+html[data-theme="dark"] .dashboard-page,
+html[data-theme="dark"] .dashboard-page * {
+    color-scheme: dark;
+}
+
+html[data-theme="dark"] .dashboard-hero,
+html[data-theme="dark"] .security-card,
+html[data-theme="dark"] .dashboard-panel,
+html[data-theme="dark"] .admin-nav-card {
+    background-color: var(--db-surface);
+    border-color: var(--db-border);
+}
+
+html[data-theme="dark"] .security-table th,
+html[data-theme="dark"] .profile-details > div,
+html[data-theme="dark"] .empty-state {
+    background-color: var(--db-soft);
+}
+
+html[data-theme="dark"] .security-table td {
+    border-color: var(--db-border);
+}
+
+/* ---------- SMALL SCREEN SUPPORT ---------- */
+@media (max-width: 900px) {
+    .security-cards,
+    .admin-navigation {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard-page {
+        width: 94%;
+        padding: 24px 0 40px;
+    }
+
+    .dashboard-hero {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 23px;
+    }
+
+    .dashboard-hero h2 {
+        font-size: 26px;
+    }
+
+    .security-cards,
+    .admin-navigation,
+    .profile-details {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-panel {
+        padding: 19px;
+    }
+
+    .security-card {
+        padding: 18px;
+    }
+
+    .panel-header {
+        align-items: flex-start;
+    }
+}
+
+/* FINAL ADMIN SUMMARY CARD ALIGNMENT */
+.admin-dashboard-page .security-cards {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+}
+
+@media (max-width: 600px) {
+    .admin-dashboard-page .security-cards {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* FINAL ADMIN SUMMARY CARD ALIGNMENT */
+.admin-dashboard-page .security-cards {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+}
+
+@media (max-width: 600px) {
+    .admin-dashboard-page .security-cards {
+        grid-template-columns: 1fr !important;
+    }
+}
+.admin-dashboard-page .security-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* USER DASHBOARD — 2 × 2 SUMMARY CARDS */
+.dashboard-page:not(.admin-dashboard-page) .security-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+
+@media (max-width: 600px) {
+    .dashboard-page:not(.admin-dashboard-page) .security-cards {
+        grid-template-columns: 1fr;
+    }
+}

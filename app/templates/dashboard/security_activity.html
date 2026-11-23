@@ -1,0 +1,55 @@
+﻿{% extends "base.html" %}
+{% block title %}AUTHVANTA | Security Activity{% endblock %}
+{% block content %}
+<main class="dashboard-page">
+
+    <section class="dashboard-hero">
+        <div>
+            <span class="dashboard-eyebrow">SECURITY MONITOR</span>
+            <h2>Security Activity</h2>
+            <p>Review recent security events associated with your account.</p>
+        </div>
+        <div class="dashboard-status"><span>●</span> Activity Monitor</div>
+    </section>
+
+    <section class="dashboard-panel full-panel">
+        <div class="panel-header">
+            <div>
+                <span class="panel-eyebrow">ACTIVITY LOG</span>
+                <h3>Recent Security Events</h3>
+            </div>
+            <span class="panel-icon">📊</span>
+        </div>
+
+        {% if logs %}
+        <div class="table-wrapper">
+            <table class="security-table">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Description</th>
+                        <th>Severity</th>
+                        <th>IP Address</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td>{{ log.event_type }}</td>
+                        <td>{{ log.description }}</td>
+                        <td><span class="severity-badge {{ log.severity|lower }}">{{ log.severity }}</span></td>
+                        <td>{{ log.ip_address or "N/A" }}</td>
+                        <td>{{ log.created_at.strftime("%d %b %Y, %H:%M") }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">No security events available.</div>
+        {% endif %}
+    </section>
+
+</main>
+{% endblock %}

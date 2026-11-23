@@ -1,0 +1,17 @@
+﻿{% extends "base.html" %}
+{% block title %}AUTHVANTA | Security Error{% endblock %}
+{% block content %}
+<main class="auth-page">
+    <section class="auth-card">
+        <div class="auth-header">
+            <div class="auth-icon">!</div>
+            <span class="section-label">SECURITY VALIDATION</span>
+            <h2>Request Could Not Be Verified</h2>
+            <p>{{ error_message }}</p>
+        </div>
+        <a href="{{ url_for('auth.login') }}" class="auth-button error-return-button">
+            RETURN TO LOGIN →
+        </a>
+    </section>
+</main>
+{% endblock %}

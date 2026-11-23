@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUTHVANTA | Authorize Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+<body class="auth-body oauth-page">
+    <main class="auth-page">
+        <section class="auth-card oauth-card">
+            <div class="auth-header">
+                <div class="auth-icon">A</div>
+                <span class="section-label">SECURE AUTHORIZATION</span>
+                <h2>Authorize Application</h2>
+                <p>An application is requesting access to your AUTHVANTA account.</p>
+            </div>
+
+            <div class="oauth-details">
+                <span>APPLICATION CLIENT ID</span>
+                <strong>{{ grant.client.client_id }}</strong>
+                <span>REQUESTED PERMISSIONS</span>
+                <strong>{{ grant.request.scope }}</strong>
+            </div>
+
+            <p class="oauth-warning">Review the requested permissions carefully before granting access.</p>
+
+            <form method="POST" class="auth-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" name="confirm" value="yes" class="auth-button">ALLOW ACCESS →</button>
+                <button type="submit" name="confirm" value="no" class="oauth-deny-button">DENY ACCESS</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>AUTHVANTA Secure Identity</p>
+                <span>Only approve applications you trust.</span>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

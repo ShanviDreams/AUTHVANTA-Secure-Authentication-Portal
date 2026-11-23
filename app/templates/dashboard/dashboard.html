@@ -1,0 +1,123 @@
+﻿
+{% extends "base.html" %}
+{% block title %}AUTHVANTA | Security Dashboard{% endblock %}
+{% block content %}
+<main class="dashboard-page">
+    <section class="dashboard-hero">
+        <div>
+            <span class="dashboard-eyebrow">AUTHVANTA / USER PORTAL</span>
+            <h2>Welcome, {{ current_user.username }}</h2>
+            <p>Your security command center. Monitor and manage your account.</p>
+        </div>
+        <div class="dashboard-status"><span>●</span> Account Protected</div>
+    </section>
+
+    <section class="security-cards">
+        <div class="security-card">
+            <div class="security-card-icon">🔐</div>
+            <div><span>Password Security</span><strong>Argon2 Protected</strong></div>
+        </div>
+        <div class="security-card">
+            <div class="security-card-icon">✉</div>
+            <div><span>Email Verification</span><strong>{% if current_user.email_verified %}Verified{% else %}Not Verified{% endif %}</strong></div>
+        </div>
+        <div class="security-card">
+            <div class="security-card-icon">🛡</div>
+            <div><span>Multi-Factor Authentication</span><strong>{% if mfa_enabled %}Enabled{% else %}Disabled{% endif %}</strong></div>
+        </div>
+        <div class="security-card">
+            <div class="security-card-icon">👤</div>
+            <div><span>Account Role</span><strong>{{ current_user.role }}</strong></div>
+        </div>
+    </section>
+
+    <section class="dashboard-grid">
+        <div class="dashboard-panel">
+            <div class="panel-header">
+                <div><span class="panel-eyebrow">ACCOUNT SECURITY</span><h3>Multi-Factor Authentication</h3></div>
+                <span class="panel-icon">🔐</span>
+            </div>
+            {% if mfa_enabled %}
+            <div class="security-active">
+                <div class="security-active-icon">✓</div>
+                <div><strong>MFA is active</strong><p>Your account requires an additional authentication code during login.</p></div>
+            </div>
+            <form method="POST" action="{{ url_for('mfa.disable') }}" style="margin-top:20px;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="mfa-disable-button">Disable MFA</button>
+            </form>
+            {% else %}
+            <div class="security-inactive">
+                <div class="security-active-icon">!</div>
+                <div><strong>MFA is currently disabled</strong><p>Add an additional authentication factor to strengthen account security.</p></div>
+            </div>
+            <a href="{{ url_for('mfa.setup') }}" class="dashboard-button">Enable MFA <span>→</span></a>
+            {% endif %}
+        </div>
+
+        <div class="dashboard-panel">
+            <div class="panel-header">
+                <div><span class="panel-eyebrow">ACCOUNT</span><h3>Account Information</h3></div>
+                <span class="panel-icon">👤</span>
+            </div>
+            <div class="profile-details">
+                <div><span>Username</span><strong>{{ current_user.username }}</strong></div>
+                <div><span>Email</span><strong>{{ current_user.email }}</strong></div>
+                <div><span>Role</span><strong>{{ current_user.role }}</strong></div>
+                <div><span>Email Status</span><strong>{% if current_user.email_verified %}Verified{% else %}Pending{% endif %}</strong></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dashboard-panel">
+        <div class="panel-header">
+            <div><span class="panel-eyebrow">RECENT ACTIVITY</span><h3>Recent Login Attempts</h3></div>
+            <span class="panel-icon">📊</span>
+        </div>
+        {% if recent_attempts %}
+        <div class="table-wrapper">
+            <table class="security-table">
+                <thead><tr><th>Time</th><th>Status</th><th>Reason</th></tr></thead>
+                <tbody>
+                    {% for attempt in recent_attempts %}
+                    <tr>
+                        <td>{{ attempt.created_at }}</td>
+                        <td>{% if attempt.success %}<span class="status-success">SUCCESS</span>{% else %}<span class="status-danger">FAILED</span>{% endif %}</td>
+                        <td>{{ attempt.reason or "—" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="empty-state">No login activity recorded yet.</p>
+        {% endif %}
+    </section>
+
+    <section class="dashboard-panel">
+        <div class="panel-header">
+            <div><span class="panel-eyebrow">SECURITY MONITORING</span><h3>Recent Security Events</h3></div>
+            <span class="panel-icon">🛡</span>
+        </div>
+        {% if recent_logs %}
+        <div class="table-wrapper">
+            <table class="security-table">
+                <thead><tr><th>Time</th><th>Event</th><th>Severity</th><th>Description</th></tr></thead>
+                <tbody>
+                    {% for log in recent_logs %}
+                    <tr>
+                        <td>{{ log.created_at }}</td>
+                        <td>{{ log.event_type }}</td>
+                        <td><span class="severity-badge {{ log.severity|lower }}">{{ log.severity }}</span></td>
+                        <td>{{ log.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="empty-state">No security events recorded yet.</p>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}

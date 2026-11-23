@@ -1,0 +1,57 @@
+﻿{% extends "base.html" %}
+{% block title %}AUTHVANTA | Login Attempts{% endblock %}
+{% block content %}
+<main class="dashboard-page admin-data-page">
+    <section class="dashboard-hero">
+        <div>
+            <span class="section-label">AUTHENTICATION / MONITORING</span>
+            <h2>Login Attempts</h2>
+            <p>Monitor successful and failed authentication attempts.</p>
+        </div>
+        <div class="account-status">AUTH MONITOR</div>
+    </section>
+
+    <section class="dashboard-panel full-panel">
+        <div class="panel-heading">
+            <div>
+                <span class="section-label">ACCESS ACTIVITY</span>
+                <h3>Authentication Records</h3>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table class="security-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Reason</th>
+                        <th>IP Address</th>
+                        <th>User Agent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for attempt in attempts %}
+                    <tr>
+                        <td>{{ attempt.created_at.strftime("%d %b %Y, %H:%M") }}</td>
+                        <td>{{ attempt.email }}</td>
+                        <td>
+                            {% if attempt.success %}
+                            <span class="severity-badge info">SUCCESS</span>
+                            {% else %}
+                            <span class="severity-badge warning">FAILED</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ attempt.reason or "N/A" }}</td>
+                        <td>{{ attempt.ip_address or "N/A" }}</td>
+                        <td class="user-agent-cell">{{ attempt.user_agent or "N/A" }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="6" class="admin-empty-cell">No login attempts recorded yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock %}

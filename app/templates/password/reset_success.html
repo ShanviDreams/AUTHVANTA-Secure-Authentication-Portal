@@ -1,0 +1,31 @@
+﻿{% extends "base.html" %}
+
+{% block title %}AUTHVANTA | Password Updated{% endblock %}
+
+{% block content %}
+<main class="auth-page">
+    <section class="auth-card">
+        <div class="auth-header">
+            <div class="auth-icon">✓</div>
+            <span class="mfa-eyebrow">SECURITY UPDATE COMPLETE</span>
+            <h2>Password Updated!</h2>
+            <p>Your password has been changed successfully.</p>
+        </div>
+
+        <div class="mfa-instruction">
+            <span class="mfa-step">✓</span>
+            <div>
+                <strong>Your account is protected</strong>
+                <p>Your new password is secured using password hashing.</p>
+            </div>
+        </div>
+
+        <a href="{{ url_for('auth.login') }}"
+           class="auth-button"
+           style="display:flex;align-items:center;justify-content:center;
+                  text-decoration:none;margin-top:25px;box-sizing:border-box;">
+            LOGIN TO AUTHVANTA <span>→</span>
+        </a>
+    </section>
+</main>
+{% endblock %}

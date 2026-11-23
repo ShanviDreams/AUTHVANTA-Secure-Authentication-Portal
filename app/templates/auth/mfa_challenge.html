@@ -1,0 +1,51 @@
+﻿{% extends "base.html" %}
+
+{% block title %}AUTHVANTA | MFA Verification{% endblock %}
+
+{% block content %}
+<main class="mfa-page">
+    <section class="mfa-card">
+
+        <div class="mfa-header">
+            <div class="mfa-icon">🔐</div>
+            <span class="mfa-eyebrow">IDENTITY VERIFICATION</span>
+            <h2>Verify Your Identity</h2>
+            <p>One more step to securely access your account.</p>
+        </div>
+
+        <div class="mfa-instruction">
+            <span class="mfa-step">✓</span>
+            <div>
+                <strong>Password verified</strong>
+                <p>Your first authentication step was successful.</p>
+            </div>
+        </div>
+
+        <div class="mfa-verification-icon">🔑</div>
+
+        <p class="mfa-verification-text">
+            Open your authenticator application and enter the current six-digit security code.
+        </p>
+
+        <form method="POST" class="mfa-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <div class="mfa-form-group">
+                <label for="code">6-Digit Authentication Code</label>
+                <input type="text" id="code" name="code"
+                       placeholder="000000" inputmode="numeric"
+                       autocomplete="one-time-code" maxlength="6"
+                       pattern="[0-9]{6}" required autofocus>
+            </div>
+
+            <button type="submit" class="mfa-button">
+                VERIFY & CONTINUE <span>→</span>
+            </button>
+        </form>
+
+        <a href="{{ url_for('auth.login') }}" class="mfa-back">
+            ← Back to Login
+        </a>
+    </section>
+</main>
+{% endblock %}

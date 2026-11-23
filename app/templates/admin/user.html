@@ -1,0 +1,57 @@
+﻿{% extends "base.html" %}
+{% block title %}AUTHVANTA | Users{% endblock %}
+{% block content %}
+<main class="dashboard-page admin-data-page">
+    <section class="dashboard-hero">
+        <div>
+            <span class="section-label">ADMINISTRATION / USER DIRECTORY</span>
+            <h2>Registered Users</h2>
+            <p>View account details, roles and email verification status.</p>
+        </div>
+        <div class="account-status">USER MANAGEMENT</div>
+    </section>
+
+    <section class="dashboard-panel full-panel">
+        <div class="panel-heading">
+            <div>
+                <span class="section-label">ACCOUNT DATABASE</span>
+                <h3>All Registered Users</h3>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table class="security-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Email Status</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td><span class="role-badge">{{ user.role }}</span></td>
+                        <td>
+                            {% if user.email_verified %}
+                            <span class="severity-badge info">VERIFIED</span>
+                            {% else %}
+                            <span class="severity-badge warning">PENDING</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ user.created_at.strftime("%d %b %Y") }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="6" class="admin-empty-cell">No registered users found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock %}
